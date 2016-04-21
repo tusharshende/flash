@@ -38,7 +38,7 @@ af=0.69 #Fraction volatile fatty acids in biodegradable volatile solids feed
 
 def muhat(T):
     return muhat_35+alpha_muhat*(T-35)
-print muhat(50)
+print (muhat(50))
 
 def rxn(Z,t):
     Ra=(muhat(50)/(1+(K_bvs/Z[0])))*Z[2]
@@ -78,9 +78,10 @@ plt.plot (t,Z_bvs)
 plt.plot (t,Z_vfa)
 plt.plot (t,Z_Xa)
 plt.plot (t,Z_Xm)
-plt.xlabel('time (sec)')
+plt.xlabel('time (days)')
 plt.ylabel('COncentration')
 plt.legend(['Z_bvs','Z_vfa','Z_Xa','Z_Xm'])
+plt.minorticks_on()
 
 #pH vs time graph
 pH_Z_bvs=-np.log(Conc[:,0])
@@ -92,10 +93,21 @@ plt.plot (t,pH_Z_bvs)
 plt.plot (t,pH_Z_vfa)
 plt.plot (t,pH_Z_Xa)
 plt.plot (t,pH_Z_Xm)
-plt.xlabel('time (sec)')
+plt.xlabel('time (days)')
 plt.ylabel('pH')
 plt.legend(['pH_Z_bvs','pH_Z_vfa','pH_Z_Xa','pH_Z_Xm'])    
+plt.minorticks_on()
 
+pH=pH_Z_Xa
+print len(pH)
+print pH
+if pH[0]<6.5 or pH[0]>8:
+    print('shutdown the reactor')
+
+else:
+    print('all ok')
+    
+    
 
     
     
